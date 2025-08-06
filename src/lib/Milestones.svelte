@@ -189,7 +189,7 @@
   }
 
   .slide-description-container p {
-    font-size: 1.0em;
+    font-size: 1.1em;
     line-height: 1.6;
     color: black;
     padding-right: 1rem;

@@ -4,6 +4,7 @@
   import Demo from './lib/Demo.svelte';
   import Milestones from './lib/Milestones.svelte';
   import Support from './lib/Support.svelte';
+  import Team from './lib/Team.svelte';
 </script>
 
 <NavBar/>
@@ -11,6 +12,7 @@
 <Demo/>
 <Milestones/>
 <Support/>  
+<Team/>
 
 <main>
 </main>
