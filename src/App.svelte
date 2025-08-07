@@ -7,15 +7,31 @@
   import Team from './lib/Team.svelte';
 </script>
 
-<NavBar/>
-<Intro/>
-<Demo/>
-<Milestones/>
-<Support/>  
-<Team/>
+<!-- Pass the section IDs as props to the NavBar -->
+<NavBar />
 
 <main>
+  <!-- Assign IDs to each section -->
+  <section id="about">
+    <Intro />
+  </section>
+  <section id="demo">
+    <Demo />
+  </section>
+  <section id="milestones">
+    <Milestones />
+  </section>
+  <section id="partners">
+    <Support />
+  </section>
+  <section id="team">
+    <Team />
+  </section>
 </main>
 
 <style>
+  /* This one-line CSS rule is what enables the smooth scrolling! */
+  :global(html) {
+    scroll-behavior: smooth;
+  }
 </style>

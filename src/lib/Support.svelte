@@ -4,18 +4,20 @@
   import nexusLogo from '../assets/nexus.jpeg';
 </script>
 
-<section class="support-section page-content">
-  <h2 class="section-title">Supported by the following partners:</h2>
-  <div class="logos-container">
-    <a href="https://savh.org.sg/" target="_blank" rel="noopener noreferrer" class="logo-link">
-      <img src={savhLogo} alt="Singapore Association of the Visually Handicapped (SAVH) Logo" class="logo-image" />
-    </a>
-    <a href="https://www.open.gov.sg/" target="_blank" rel="noopener noreferrer" class="logo-link">
-      <img src={ogpLogo} alt="Open Government Products (OGP) Logo" class="logo-image" />
-    </a>
-    <a href="https://www.mindef.gov.sg/about-us/community-engagement/nexus" target="_blank" rel="noopener noreferrer" class="logo-link">
-      <img src={nexusLogo} alt="Nexus Logo" class="logo-image" />
-    </a>
+<section class="support-section">
+  <div class="page-content">
+    <h2 class="section-title">Supported by the following partners:</h2>
+    <div class="logos-container">
+      <a href="https://savh.org.sg/" target="_blank" rel="noopener noreferrer" class="logo-link">
+        <img src={savhLogo} alt="Singapore Association of the Visually Handicapped (SAVH) Logo" class="logo-image" />
+      </a>
+      <a href="https://www.open.gov.sg/" target="_blank" rel="noopener noreferrer" class="logo-link">
+        <img src={ogpLogo} alt="Open Government Products (OGP) Logo" class="logo-image" />
+      </a>
+      <a href="https://www.mindef.gov.sg/about-us/community-engagement/nexus" target="_blank" rel="noopener noreferrer" class="logo-link">
+        <img src={nexusLogo} alt="Nexus Logo" class="logo-image" />
+      </a>
+    </div>
   </div>
 </section>
 
@@ -24,8 +26,13 @@
     color: black;
     padding-top: 1rem;
     padding-bottom: 4rem;
-    text-align: center; 
+    text-align: center;
     background-color: white;
+  }
+  .page-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
   }
 
   .section-title {
@@ -52,6 +59,9 @@
   .logo-link:hover {
     transform: translateY(-15px);
   }
+  .logo-link:active {
+    transform: translateY(-15px);
+  }
 
   .logo-image {
     max-height: 100px;
@@ -59,11 +69,16 @@
   }
 
   @media (max-width: 768px) {
+    .section-title {
+      font-size: 1.8em; 
+    }
     .logos-container {
-      gap: 4rem;
+      flex-direction: column; 
+      gap: 3rem;
     }
     .logo-image {
-      max-height: 50px;
+      max-height: 80px; 
+      max-width: 250px;
     }
   }
 </style>

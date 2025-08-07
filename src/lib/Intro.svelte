@@ -47,15 +47,15 @@
 }
 h2 {
   font-size: 2.2em;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   font-weight: 600;
 }
 
 p {
   line-height: 1.7;
-  font-size: 1.2em;
+  font-size: 1.1em;
   max-width: 55ch;
-  margin: 0 0 1.5rem 0;
+  margin: 0 0 1rem 0;
 }
 
 @media (max-width: 768px) {

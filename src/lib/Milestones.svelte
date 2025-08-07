@@ -184,15 +184,16 @@
 
   .slide-description-container h3 {
     font-size: 1.6em;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     color: var(--heading-color, #111827);
   }
 
   .slide-description-container p {
-    font-size: 1.1em;
+    font-size: 1.05em;
     line-height: 1.6;
     color: black;
     padding-right: 1rem;
+    margin-top: 0; 
   }
 
   @media (max-width: 1200px) {
@@ -206,7 +207,6 @@
 
   @media (max-width: 768px) {
     .slides-container {
-
       min-height: 600px; 
     }
     .carousel-slide {
