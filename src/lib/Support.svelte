@@ -1,84 +1,53 @@
 <script lang="ts">
-  import savhLogo from '../assets/savh.png';
-  import ogpLogo from '../assets/ogp.png';
-  import nexusLogo from '../assets/nexus.jpeg';
+    type SupportGroup = {
+        siteUrl: `${"http" | "https"}://${string}`;
+        logoUrl: `${string}${".jpg" | ".png" | ".jpeg"}`;
+        altText: string;
+    };
+
+    const supportGroups: SupportGroup[] = [
+        {
+            siteUrl: "https://savh.org.sg/",
+            logoUrl: "savh.png",
+            altText:
+                "Singapore Association of the Visually Handicapped (SAVH) Logo",
+        },
+        {
+            siteUrl: "https://www.open.gov.sg/",
+            logoUrl: "ogp.png",
+            altText: "Open Government Products (OGP) Logo",
+        },
+        {
+            siteUrl:
+                "https://www.mindef.gov.sg/about-us/community-engagement/nexus",
+            logoUrl: "nexus.jpeg",
+            altText: "Nexus Logo",
+        },
+    ];
 </script>
 
-<section class="support-section">
-  <div class="page-content">
-    <h2 class="section-title">Supported by the following partners:</h2>
-    <div class="logos-container">
-      <a href="https://savh.org.sg/" target="_blank" rel="noopener noreferrer" class="logo-link">
-        <img src={savhLogo} alt="Singapore Association of the Visually Handicapped (SAVH) Logo" class="logo-image" />
-      </a>
-      <a href="https://www.open.gov.sg/" target="_blank" rel="noopener noreferrer" class="logo-link">
-        <img src={ogpLogo} alt="Open Government Products (OGP) Logo" class="logo-image" />
-      </a>
-      <a href="https://www.mindef.gov.sg/about-us/community-engagement/nexus" target="_blank" rel="noopener noreferrer" class="logo-link">
-        <img src={nexusLogo} alt="Nexus Logo" class="logo-image" />
-      </a>
+<section class="text-black pt-4 pb-16 text-center bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+        <h2 class="text-4xl font-bold mb-10 text-2xl md:text-4xl">
+            Supported by the following partners:
+        </h2>
+        <div
+            class="flex justify-center items-center gap-12 md:gap-24 flex-col md:flex-row max-w-4xl mx-auto"
+        >
+            {#each supportGroups as group}
+                <a
+                    href={group.siteUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-block transition-transform duration-300 ease-in-out hover:-translate-y-4"
+                >
+                    <img
+                        src={group.logoUrl}
+                        alt={group.altText}
+                        class="max-h-20 md:max-h-24 w-auto"
+                    />
+                </a>
+            {/each}
+        </div>
     </div>
-  </div>
 </section>
-
-<style>
-  .support-section {
-    color: black;
-    padding-top: 1rem;
-    padding-bottom: 4rem;
-    text-align: center;
-    background-color: white;
-  }
-  .page-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
-  }
-
-  .section-title {
-    font-size: 2.2em;
-    font-weight: 600;
-    margin-bottom: 2.5rem;
-  }
-
-  .logos-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 6rem; 
-    flex-wrap: wrap;
-    max-width: 900px; 
-    margin: 0 auto; 
-  }
-
-  .logo-link {
-    display: inline-block;
-    transition: transform 0.3s ease;
-  }
-
-  .logo-link:hover {
-    transform: translateY(-15px);
-  }
-  .logo-link:active {
-    transform: translateY(-15px);
-  }
-
-  .logo-image {
-    max-height: 100px;
-    width: auto;
-  }
-
-  @media (max-width: 768px) {
-    .section-title {
-      font-size: 1.8em; 
-    }
-    .logos-container {
-      flex-direction: column; 
-      gap: 3rem;
-    }
-    .logo-image {
-      max-height: 80px; 
-      max-width: 250px;
-    }
-  }
-</style>

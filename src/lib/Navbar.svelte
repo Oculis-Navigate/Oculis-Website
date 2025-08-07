@@ -1,106 +1,34 @@
 <script lang="ts">
-  import logoSrc from '../assets/logo.jpeg';
-  const sections = ['About', 'Demo', 'Milestones', 'Partners', 'Team'];
+    const sections: string[] = [
+        "About",
+        "Demo",
+        "Milestones",
+        "Partners",
+        "Team",
+    ];
 </script>
 
-<nav class="navbar">
-  <div class="logo">
-    <a href="#about">
-      <img src={logoSrc} alt="Logo" />
-    </a>
-  </div>
+<nav
+    class="w-full bg-white px-4 py-1 lg:shadow-md lg:grid lg:grid-cols-[auto_1fr] lg:items-center"
+>
+    <div class="flex justify-center pt-10 lg:pl-16 lg:pt-0">
+        <a href="#about">
+            <img src="/logo.jpeg" alt="Logo" class="h-28 lg:h-24 w-auto" />
+        </a>
+    </div>
 
-  <ul class="nav-links">
-    {#each sections as section}
-      <li><a href={'#' + section.toLowerCase()}>{section}</a></li>
-    {/each}
-  </ul>
+    <ul
+        class="hidden lg:flex list-none p-0 m-0 flex-col lg:flex-row lg:justify-between lg:items-center lg:w-[70%] lg:mx-auto w-full items-center gap-4 lg:gap-0"
+    >
+        {#each sections as section}
+            <li>
+                <a
+                    href={"#" + section.toLowerCase()}
+                    class="text-black no-underline font-bold text-lg lg:text-2xl py-2 relative inline-block transition-transform duration-300 ease-in-out hover:scale-110 after:content-[''] after:absolute after:left-0 after:right-0 after:bottom-0 after:h-[2px] after:bg-black after:scale-x-0 after:origin-center after:transition-transform after:duration-150 after:ease-in-out hover:after:scale-x-100"
+                >
+                    {section}
+                </a>
+            </li>
+        {/each}
+    </ul>
 </nav>
-
-<style>
-  nav.navbar {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: center;
-    width: 100%;
-    background-color: #fff;
-    padding: 0.25rem 1rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  }
-
-  .logo img {
-    height: 5.5rem;
-    padding-left: 4rem;
-    width: auto;
-  }
-
-  .nav-links {
-    grid-column: 2;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 70%;           
-    margin: 0 auto;       
-    list-style: none;
-    padding: 0;
-  }
-
-  .nav-links a {
-    color: #000;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 1.65rem;    
-    padding: 0.5rem 0;     
-    position: relative;
-    display: inline-block; 
-    transition: color 150ms, transform 0.3s ease; 
-  }
-  
-  .nav-links a:hover {
-    transform: scale(1.2); 
-  }
-
-  .nav-links a::after {
-    content: '';
-    position: absolute;
-    left: 0; right: 0;
-    bottom: 0; 
-    height: 2px;
-    background-color: black;
-    transform: scaleX(0);
-    transform-origin: center; 
-    transition: transform 150ms ease-in-out;
-  }
-
-  .nav-links a:hover::after {
-    transform: scaleX(1);
-  }
-
-  @media (max-width: 992px) {
-    nav.navbar {
-      display: flex;
-      flex-direction: column;
-      padding: 1rem; 
-    }
-
-    .logo img {
-      height: 4.5rem;
-      padding-left: 0; 
-      margin-bottom: 1rem;
-    }
-
-    .nav-links {
-      grid-column: unset;
-      width: 100%;
-      margin: 0;
-      
-      flex-direction: column;
-      align-items: center; 
-      gap: 1rem; 
-    }
-
-    .nav-links a {
-      font-size: 1.2rem;
-    }
-  }
-</style>
