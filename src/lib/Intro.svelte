@@ -8,7 +8,7 @@
             class="w-full max-w-[250px] h-auto rounded-xl shadow-lg"
         />
     </div>
-    <div class="flex-1 flex flex-col justify-center">
+    <div class="flex-1 flex flex-col justify-center lg:pl-6">
         <h2 class="font-bold text-5xl mb-4">Oculis</h2>
         <p class="text-lg leading-relaxed max-w-prose mx-auto md:mx-0 mb-4">
             Oculis is an iOS application designed to enhance public transit

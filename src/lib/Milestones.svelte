@@ -13,19 +13,19 @@
             imageSrc: "/ndp-engagement.jpg",
             title: "NDP Engagement",
             description:
-                "Our team presented Oculis to Senior Minister Zaqy Mohamad and Minister Desmond Choo, demonstrating how this assistive technology strengthens Singapore's Social Defence by creating an inclusive society where everyone can contribute to our nation's resilience.",
+                "We presented Oculis to Senior Minister Zaqy Mohamad and Minister Desmond Choo, demonstrating how it strengthens Singapore's Social Defence by creating an inclusive society where everyone can contribute to our nation's resilience.",
         },
         {
             imageSrc: "innofest.jpg",
             title: "NTU Innofest",
             description:
-                "Our team presented Oculis to MP Shawn Huang at NTU Innofest, showing how it enables visually impaired Singaporeans to navigate independently and confidently, fostering a more inclusive society.",
+                "We presented Oculis to MP Shawn Huang at NTU Innofest, showing how it enables visually impaired Singaporeans to navigate independently and confidently, fostering a more inclusive society.",
         },
         {
             imageSrc: "hpc.jpeg",
             title: "Supercomputing Asia 2025",
             description:
-                "Our team presented Oculis to an international audience at Supercomputing Asia 2025, showcasing how we used high performance computing to empower the visually impaired and drive social good.",
+                "We presented Oculis to an international audience at Supercomputing Asia 2025, showcasing how we used high performance computing to empower the visually impaired and drive social good.",
         },
     ];
 
@@ -65,26 +65,29 @@
 <section class="text-center p-8 pb-16 bg-white text-black">
     <h2 class="text-4xl font-bold mb-10">Our Milestones</h2>
     <div class="relative max-w-6xl mx-auto">
+        <!-- Previous Button -->
         <button
-            class="absolute top-1/2 -translate-y-1/2 z-10 bg-white/90 border-none rounded-full w-14 h-14 cursor-pointer flex items-center justify-center shadow-lg transition-all hover:bg-white hover:scale-110 left-4"
+            class="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 z-10 bg-white/90 border-none rounded-full w-12 h-12 cursor-pointer flex items-center justify-center shadow-lg transition-all hover:bg-white hover:scale-110"
             on:click={() => goToSlide("prev")}
             aria-label="Previous slide"
         >
             <svg
-                class="w-9 h-9"
+                class="w-7 h-7"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="currentColor"
                 ><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" /></svg
             >
         </button>
+
+        <!-- Next Button -->
         <button
-            class="absolute top-1/2 -translate-y-1/2 z-10 bg-white/90 border-none rounded-full w-14 h-14 cursor-pointer flex items-center justify-center shadow-lg transition-all hover:bg-white hover:scale-110 right-4"
+            class="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 z-10 bg-white/90 border-none rounded-full w-12 h-12 cursor-pointer flex items-center justify-center shadow-lg transition-all hover:bg-white hover:scale-110"
             on:click={() => goToSlide("next")}
             aria-label="Next slide"
         >
             <svg
-                class="w-9 h-9"
+                class="w-7 h-7"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="currentColor"
@@ -99,12 +102,13 @@
         >
             {#key currentIndex}
                 <div
-                    class="absolute top-0 left-0 w-full h-full flex items-center gap-6 md:gap-16 p-8 md:p-12 box-border flex-col md:flex-row text-center md:text-left"
+                    class="absolute top-0 left-0 w-full h-full flex items-center gap-6 md:gap-12 p-8 md:p-12 box-border flex-col md:flex-row text-center md:text-left"
                     in:fade={{ duration: 600 }}
                     out:fade={{ duration: 600 }}
                 >
+                    <!-- Image Container -->
                     <div
-                        class="flex-shrink-0 w-full max-w-sm md:w-[500px] h-[250px] md:h-[350px] overflow-hidden rounded-2xl"
+                        class="flex-shrink-0 w-full max-w-sm md:max-w-none md:w-1/2 h-[250px] md:h-[350px] overflow-hidden rounded-2xl"
                     >
                         <img
                             src={carouselData[currentIndex].imageSrc}
@@ -112,7 +116,8 @@
                             class="w-full h-full object-cover block rounded-2xl"
                         />
                     </div>
-                    <div class="flex-1">
+                    <!-- Text Container -->
+                    <div class="w-full md:w-1/2">
                         <h3 class="text-2xl font-bold mb-2">
                             {carouselData[currentIndex].title}
                         </h3>
