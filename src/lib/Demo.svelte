@@ -8,17 +8,21 @@
         <div
             class="flex-1 lg:flex-auto lg:w-3/5 min-w-[300px] lg:min-w-[400px]"
         >
-            <video
-                class="w-full h-auto rounded-2xl shadow-xl block"
-                autoplay
-                loop
-                muted
-                playsinline
-                aria-describedby="video-description"
+            <div
+                class="relative w-full h-0 pb-[56.25%] rounded-2xl shadow-xl overflow-hidden"
             >
-                <source src="/demo.mp4" type="video/mp4" />
-            </video>
+                <iframe
+                    class="absolute top-0 left-0 w-full h-full"
+                    src="https://www.youtube.com/embed/RO1xsvhg7Y0?autoplay=1&mute=1&loop=1&playlist=RO1xsvhg7Y0&playsinline=1&controls=0&rel=0"
+                    title="Oculis app demonstration video"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                ></iframe>
+                <div class="absolute top-0 left-0 w-full h-full"></div>
+            </div>
 
+            <!-- Accessibility description -->
             <span id="video-description" class="sr-only">
                 A short demonstration video showing the Oculis app interface
                 being used to identify a bus and plan a journey.
