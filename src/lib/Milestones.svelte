@@ -117,7 +117,7 @@
                         />
                     </div>
                     <!-- Text Container -->
-                    <div class="w-full md:w-1/2">
+                    <div class="w-full md:w-1/2 mb-6 md:mb-0">
                         <h3 class="text-2xl font-bold mb-2">
                             {carouselData[currentIndex].title}
                         </h3>
