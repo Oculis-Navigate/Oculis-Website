@@ -5,9 +5,7 @@
     <div
         class="flex items-center gap-12 max-w-6xl mx-auto flex-col lg:flex-row text-center lg:text-left"
     >
-        <div
-            class="flex-1 lg:flex-auto lg:w-3/5 min-w-[300px] lg:min-w-[400px]"
-        >
+        <div class="flex-1 lg:flex-auto w-full lg:w-1/2">
             <div
                 class="relative w-full h-0 pb-[56.25%] rounded-2xl shadow-xl overflow-hidden"
             >
@@ -39,7 +37,7 @@
             <img
                 src="/qrcode.jpeg"
                 alt="QR code linking to the Oculis app download page."
-                class="w-full max-w-[300px] h-auto"
+                class="w-3/4 lg:w-3/4 h-auto"
             />
             <p class="text-lg">Scan to experience Oculis now.</p>
 

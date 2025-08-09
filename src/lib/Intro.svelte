@@ -5,7 +5,7 @@
         <img
             src="app-image.jpeg"
             alt="Oculis App Screenshot"
-            class="w-full max-w-[250px] h-auto rounded-xl shadow-lg"
+            class="w-full max-w-[18rem] h-auto rounded-xl shadow-lg"
         />
     </div>
     <div class="flex-1 flex flex-col justify-center lg:pl-6">

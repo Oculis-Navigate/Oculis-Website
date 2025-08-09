@@ -98,7 +98,7 @@
         </button>
 
         <div
-            class="relative overflow-hidden rounded-3xl shadow-lg bg-white min-h-[600px] md:min-h-[450px]"
+            class="relative rounded-3xl shadow-lg bg-white min-h-180 md:min-h-120"
         >
             {#key currentIndex}
                 <div
@@ -108,7 +108,7 @@
                 >
                     <!-- Image Container -->
                     <div
-                        class="flex-shrink-0 w-full max-w-sm md:max-w-none md:w-1/2 h-[250px] md:h-[350px] overflow-hidden rounded-2xl"
+                        class="flex-shrink-0 w-full max-w-sm md:max-w-none md:w-1/2 h-60 md:h-100 overflow-hidden rounded-2xl"
                     >
                         <img
                             src={carouselData[currentIndex].imageSrc}
@@ -117,12 +117,14 @@
                         />
                     </div>
                     <!-- Text Container -->
-                    <div class="w-full md:w-1/2 mb-6 md:mb-0">
+                    <div
+                        class="w-full flex flex-col grow justify-center md:w-1/2"
+                    >
                         <h3 class="text-2xl font-bold mb-2">
                             {carouselData[currentIndex].title}
                         </h3>
                         <p
-                            class="text-base leading-relaxed text-black pr-0 md:pr-4 mt-0"
+                            class="text-base leading-relaxed text-black py-6 pr-0 md:pr-4"
                         >
                             {carouselData[currentIndex].description}
                         </p>
@@ -132,3 +134,4 @@
         </div>
     </div>
 </section>
+
