@@ -10,6 +10,12 @@
 
     const carouselData: CarouselItem[] = [
         {
+            imageSrc: "bfg-accelerator-2025.jpg",
+            title: "Build for Good Accelerator 2025",
+            description:
+                "We presented Oculis at the Build for Good Accelerator 2025 finale to Minister of State Jasmin Lau, showcasing how our solution helps visually impaired commuters navigate public transport with confidence and independence.",
+        },
+        {
             imageSrc: "/ndp-engagement.jpg",
             title: "NDP Engagement",
             description:
