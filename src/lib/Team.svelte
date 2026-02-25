@@ -6,14 +6,14 @@
     };
     const teamMembers: TeamMember[] = [
         {
-            name: "Sriram",
-            image: "sriram.jpg",
-            linkedin: "https://www.linkedin.com/in/sriram-jeyakumar/",
-        },
-        {
             name: "Ryan",
             image: "ryan.jpg",
             linkedin: "https://www.linkedin.com/in/ryanyeojl/",
+        },
+        {
+            name: "Sriram",
+            image: "sriram.jpg",
+            linkedin: "https://www.linkedin.com/in/sriram-jeyakumar/",
         },
         {
             name: "Kiah Hong",

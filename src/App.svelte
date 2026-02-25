@@ -4,6 +4,7 @@
     import NavBar from "./lib/Navbar.svelte";
     import Intro from "./lib/Intro.svelte";
     import Demo from "./lib/Demo.svelte";
+    import WorkInProgress from "./lib/WorkInProgress.svelte";
     import Milestones from "./lib/Milestones.svelte";
     import Partners from "./lib/Partners.svelte";
     import Team from "./lib/Team.svelte";
@@ -23,6 +24,9 @@
         </section>
         <section id="demo">
             <Demo />
+        </section>
+        <section id="wip">
+            <WorkInProgress />
         </section>
         <section id="milestones">
             <Milestones />
