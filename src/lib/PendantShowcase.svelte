@@ -4,8 +4,10 @@
   import anime from 'animejs';
 
   let isFlipped = $state(false);
+  let showcaseContainer: HTMLElement | undefined = $state();
   let pendantWrapper: HTMLDivElement | undefined = $state();
   let isAnimating = $state(false);
+  let prefersReducedMotion = $state(false);
 
   const frontAnnotations = [
     { id: 'btn', text: 'Textured Action Button (Knurled)', top: '15%', left: '80%' },
@@ -19,18 +21,62 @@
   ];
 
   onMount(() => {
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const settleCurrentView = () => {
+      const frontCallouts = showcaseContainer?.querySelectorAll('.annotation.front');
+      const backCallouts = showcaseContainer?.querySelectorAll('.annotation.back');
+
+      anime.remove(frontCallouts);
+      anime.remove(backCallouts);
+      if (frontCallouts) anime.set(frontCallouts, { opacity: isFlipped ? 0 : 1, translateX: 0 });
+      if (backCallouts) anime.set(backCallouts, { opacity: isFlipped ? 1 : 0, translateX: 0 });
+
+      if (pendantWrapper) {
+        anime.remove(pendantWrapper);
+        anime.set(pendantWrapper, { rotateY: isFlipped ? 180 : 0 });
+      }
+      isAnimating = false;
+    };
+    const updateMotionPreference = () => {
+      prefersReducedMotion = motionQuery.matches;
+      if (prefersReducedMotion) settleCurrentView();
+    };
+
+    updateMotionPreference();
+    motionQuery.addEventListener('change', updateMotionPreference);
+
+    if (prefersReducedMotion) {
+      return () => motionQuery.removeEventListener('change', updateMotionPreference);
+    }
+
     anime({
-      targets: '.annotation.front',
+      targets: showcaseContainer?.querySelectorAll('.annotation.front'),
       opacity: [0, 1],
       translateX: [-20, 0],
       delay: anime.stagger(150),
       easing: 'easeOutQuad',
       duration: 600
     });
+
+    return () => {
+      motionQuery.removeEventListener('change', updateMotionPreference);
+      anime.remove(showcaseContainer?.querySelectorAll('.annotation'));
+      if (pendantWrapper) anime.remove(pendantWrapper);
+    };
   });
 
   function handleFlip() {
     if (isAnimating) return;
+
+    if (prefersReducedMotion) {
+      isFlipped = !isFlipped;
+      if (pendantWrapper) {
+        anime.remove(pendantWrapper);
+        pendantWrapper.style.transform = `rotateY(${isFlipped ? 180 : 0}deg)`;
+      }
+      return;
+    }
+
     isAnimating = true;
 
     const tl = anime.timeline({
@@ -42,8 +88,12 @@
     });
 
     const targetRotation = isFlipped ? 0 : 180;
-    const hideClass = isFlipped ? '.annotation.back' : '.annotation.front';
-    const showClass = isFlipped ? '.annotation.front' : '.annotation.back';
+    const hideClass = showcaseContainer?.querySelectorAll(
+      isFlipped ? '.annotation.back' : '.annotation.front'
+    );
+    const showClass = showcaseContainer?.querySelectorAll(
+      isFlipped ? '.annotation.front' : '.annotation.back'
+    );
 
     tl.add({
       targets: hideClass,
@@ -65,12 +115,28 @@
   }
 </script>
 
-<div class="showcase-container">
-  <div class="scene">
+<section
+  class="showcase-container"
+  bind:this={showcaseContainer}
+  aria-labelledby="pendant-showcase-heading"
+>
+  <h2 id="pendant-showcase-heading" class="visually-hidden">
+    Explore the Oculis wearable
+  </h2>
+
+  <div
+    class="scene"
+    id="pendant-view"
+    role="group"
+    aria-label={isFlipped ? 'Back view of the Oculis wearable' : 'Front view of the Oculis wearable'}
+    aria-describedby="pendant-view-description"
+    aria-busy={isAnimating}
+  >
     {#each frontAnnotations as ann}
       <div 
         class="annotation front" 
-        style="top: {ann.top}; left: {ann.left}; opacity: 0;"
+        style="top: {ann.top}; left: {ann.left}; opacity: {isFlipped ? 0 : 1};"
+        aria-hidden="true"
       >
         <div class="annotation-content">
           <div class="line"></div>
@@ -82,7 +148,8 @@
     {#each backAnnotations as ann}
       <div 
         class="annotation back" 
-        style="top: {ann.top}; left: {ann.left}; opacity: 0;"
+        style="top: {ann.top}; left: {ann.left}; opacity: {isFlipped ? 1 : 0};"
+        aria-hidden="true"
       >
         <div class="annotation-content">
           <div class="line"></div>
@@ -92,15 +159,32 @@
     {/each}
 
     <div class="pendant-wrapper" bind:this={pendantWrapper}>
-      <img src="/front-view.png" alt="Front" class="face face-front" />
-      <img src="/back-view.png" alt="Back" class="face face-back" />
+      <img src="/front-view.png" alt="" class="face face-front" />
+      <img src="/back-view.png" alt="" class="face face-back" />
     </div>
   </div>
 
-  <button class="flip-btn" onclick={handleFlip} disabled={isAnimating}>
+  <p
+    id="pendant-view-description"
+    class="visually-hidden"
+    aria-live="polite"
+    aria-atomic="true"
+  >
+    {isFlipped
+      ? 'Back view. Features shown: lanyard attachment point and laser-engraved lighthouse logo.'
+      : 'Front view. Features shown: textured knurled action button, OV9281 camera and smoked-glass lens cover.'}
+  </p>
+
+  <button
+    class="flip-btn"
+    type="button"
+    onclick={handleFlip}
+    aria-disabled={isAnimating}
+    aria-controls="pendant-view"
+  >
     {isFlipped ? 'View Front' : 'View Back'}
   </button>
-</div>
+</section>
 
 <style>
   .showcase-container {
@@ -239,7 +323,7 @@
     font-size: 0.9rem;
     font-weight: 600;
     color: #fff;
-    background: linear-gradient(135deg, #3182ce 0%, #2c5282 100%);
+    background: linear-gradient(135deg, #286da8 0%, #2c5282 100%);
     border: none;
     border-radius: 50px;
     cursor: pointer;
@@ -249,17 +333,40 @@
     letter-spacing: 0.05em;
   }
 
-  .flip-btn:hover:not(:disabled) {
+  .flip-btn:hover:not([aria-disabled="true"]) {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(49, 130, 206, 0.4);
   }
 
-  .flip-btn:active:not(:disabled) {
+  .flip-btn:active:not([aria-disabled="true"]) {
     transform: translateY(0);
   }
 
-  .flip-btn:disabled {
+  .flip-btn:focus-visible {
+    outline: 3px solid #050505;
+    outline-offset: 4px;
+  }
+
+  .flip-btn[aria-disabled="true"] {
     opacity: 0.7;
     cursor: not-allowed;
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .flip-btn {
+      transition: none;
+    }
   }
 </style>
