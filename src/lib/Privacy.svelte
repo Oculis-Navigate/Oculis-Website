@@ -1,14 +1,22 @@
-<script lang="ts">
-</script>
+<svelte:head>
+    <title>Privacy Policy — Oculis</title>
+    <meta
+        name="description"
+        content="How the Oculis app handles camera, location and public transport data."
+    />
+</svelte:head>
 
 <div class="min-h-screen bg-white text-black">
     <div class="max-w-3xl mx-auto px-6 py-12">
-        <div class="flex justify-center mb-12">
-            <img src="/logo.jpeg" alt="Oculis Logo" class="h-28 w-auto" />
-        </div>
+        <header class="flex justify-center mb-12">
+            <a href="/" aria-label="Oculis home">
+                <img src="/logo.jpeg" alt="" class="h-28 w-auto" />
+            </a>
+        </header>
 
-        <h1 class="text-3xl font-bold mb-2">Privacy Policy</h1>
-        <p class="text-gray-600 mb-8">Last updated: February 2026</p>
+        <main id="main-content" tabindex="-1">
+            <h1 class="text-3xl font-bold mb-2">Privacy Policy</h1>
+            <p class="text-gray-600 mb-8">Last updated: <time datetime="2026-02">February 2026</time></p>
 
         <h2 class="text-xl font-bold mt-8 mb-4">Introduction</h2>
         <p class="mb-4 leading-relaxed">
@@ -100,14 +108,15 @@
         <p class="mb-2 leading-relaxed">
             If you have questions about this Privacy Policy, please contact us:
         </p>
-        <p class="leading-relaxed">
-            Oculis Vision Pte Ltd<br />
-            UEN: 202555755Z<br />
-            Email:
-            <a
-                href="mailto:support@oculis.vision"
-                class="text-blue-600 underline">support@oculis.vision</a
-            >
-        </p>
+            <p class="leading-relaxed">
+                Oculis Vision Pte Ltd<br />
+                UEN: 202555755Z<br />
+                Email:
+                <a
+                    href="mailto:support@oculis.vision"
+                    class="text-blue-600 underline">support@oculis.vision</a
+                >
+            </p>
+        </main>
     </div>
 </div>

@@ -1,143 +1,134 @@
 <script lang="ts">
-    import { onMount, onDestroy } from "svelte";
-    import { fade } from "svelte/transition";
+    import SectionMarker from "./SectionMarker.svelte";
 
-    type CarouselItem = {
-        imageSrc: `${string}${".jpg" | ".png" | ".jpeg"}`;
-        title: string;
-        description: string;
-    };
+    let revealedMoment = $state<number | null>(null);
 
-    const carouselData: CarouselItem[] = [
+    const moments = [
         {
-            imageSrc: "bfg-accelerator-2025.jpg",
-            title: "Build for Good Accelerator 2025",
-            description:
-                "We presented Oculis at the Build for Good Accelerator 2025 finale to Minister of State Jasmin Lau, showcasing how our solution helps visually impaired commuters navigate public transport with confidence and independence.",
+            image: "/bfg-accelerator-2025.jpg",
+            label: "Build for Good · 2025",
+            title: "Build for Good finale",
+            copy: "Supported by Open Government Products with funding, mentorship and access to the communities we build with.",
+            position: "50% 44%",
+            featured: true,
         },
         {
-            imageSrc: "/ndp-engagement.jpg",
-            title: "NDP Engagement",
-            description:
-                "We presented Oculis to Senior Minister Zaqy Mohamad and Minister Desmond Choo, demonstrating how it strengthens Singapore's Social Defence by creating an inclusive society where everyone can contribute to our nation's resilience.",
+            image: "/ndp-engagement.jpg",
+            label: "NDP stakeholder engagement",
+            title: "In conversation with public leaders",
+            copy: "Sharing our approach to accessible transport with Zaqy Mohamad and Desmond Choo.",
+            position: "50% 48%",
+            featured: false,
         },
         {
-            imageSrc: "innofest.jpg",
-            title: "NTU Innofest",
-            description:
-                "We presented Oculis to MP Shawn Huang at NTU Innofest, showing how it enables visually impaired Singaporeans to navigate independently and confidently, fostering a more inclusive society.",
+            image: "/innofest.jpg",
+            label: "NTU InnovFest",
+            title: "A working product, out in the open",
+            copy: "Demonstrating the wearable with Shawn Huang, alongside our field research and plans for what comes next.",
+            position: "50% 42%",
+            featured: false,
         },
         {
-            imageSrc: "hpc.jpeg",
-            title: "Supercomputing Asia 2025",
-            description:
-                "We presented Oculis to an international audience at Supercomputing Asia 2025, showcasing how we used high performance computing to empower the visually impaired and drive social good.",
+            image: "/hpc.jpeg",
+            label: "Supercomputing Asia",
+            title: "Private AI for everyday journeys",
+            copy: "Showing how private, on-device AI can support more accessible movement through the city.",
+            position: "50% 45%",
+            featured: false,
         },
     ];
-
-    let currentIndex = 0;
-    let intervalId: number;
-    const intervalTime = 8000;
-
-    function goToSlide(direction: "next" | "prev") {
-        if (direction === "next") {
-            currentIndex = (currentIndex + 1) % carouselData.length;
-        } else {
-            currentIndex =
-                (currentIndex - 1 + carouselData.length) % carouselData.length;
-        }
-
-        resetInterval();
-    }
-
-    function startInterval() {
-        intervalId = setInterval(() => goToSlide("next"), intervalTime);
-    }
-
-    function resetInterval() {
-        clearInterval(intervalId);
-        startInterval();
-    }
-
-    onMount(() => {
-        startInterval();
-    });
-
-    onDestroy(() => {
-        clearInterval(intervalId);
-    });
 </script>
 
-<section class="text-center p-8 pb-16 bg-white text-black">
-    <h2 class="text-4xl font-bold mb-10">Our Milestones</h2>
-    <div class="relative max-w-6xl mx-auto">
-        <!-- Previous Button -->
-        <button
-            class="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 z-10 bg-white/90 border-none rounded-full w-12 h-12 cursor-pointer flex items-center justify-center shadow-lg transition-all hover:bg-white hover:scale-110"
-            on:click={() => goToSlide("prev")}
-            aria-label="Previous slide"
-        >
-            <svg
-                class="w-7 h-7"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                ><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" /></svg
-            >
-        </button>
+<section class="progress-section" id="progress" data-preview="progress" aria-labelledby="progress-heading">
+    <div class="page-shell">
+        <SectionMarker number={3} label="Where we’ve been" />
 
-        <!-- Next Button -->
-        <button
-            class="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 z-10 bg-white/90 border-none rounded-full w-12 h-12 cursor-pointer flex items-center justify-center shadow-lg transition-all hover:bg-white hover:scale-110"
-            on:click={() => goToSlide("next")}
-            aria-label="Next slide"
-        >
-            <svg
-                class="w-7 h-7"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                ><path
-                    d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
-                /></svg
-            >
-        </button>
+        <div class="progress-intro">
+            <h2 id="progress-heading">Built with the community.<br />Recognised across Singapore.</h2>
+            <p>
+                From early fieldwork to national showcases, each step has put
+                Oculis in front of the people who can make accessible journeys
+                the norm.
+            </p>
+        </div>
 
-        <div
-            class="relative rounded-3xl shadow-lg bg-white min-h-180 md:min-h-120"
-        >
-            {#key currentIndex}
-                <div
-                    class="absolute top-0 left-0 w-full h-full flex items-center gap-6 md:gap-12 p-8 md:p-12 box-border flex-col md:flex-row text-center md:text-left"
-                    in:fade={{ duration: 600 }}
-                    out:fade={{ duration: 600 }}
+        <div class="stream-label">
+            <span>Events &amp; showcases</span>
+            <span>04 entries</span>
+        </div>
+
+        <div class="moments-grid">
+            {#each moments as moment, index}
+                <article
+                    class:featured={moment.featured}
+                    class:revealed={revealedMoment === index}
+                    aria-labelledby={`moment-${index + 1}-title`}
                 >
-                    <!-- Image Container -->
-                    <div
-                        class="flex-shrink-0 w-full max-w-sm md:max-w-none md:w-1/2 h-60 md:h-100 overflow-hidden rounded-2xl"
+                    <button
+                        class="moment-image"
+                        type="button"
+                        aria-label={`${revealedMoment === index ? "Return" : "Reveal"} ${moment.title} photograph ${revealedMoment === index ? "to monochrome" : "in colour"}`}
+                        aria-describedby={`moment-${index + 1}-caption`}
+                        aria-pressed={revealedMoment === index}
+                        onclick={() => revealedMoment = revealedMoment === index ? null : index}
                     >
                         <img
-                            src={carouselData[currentIndex].imageSrc}
-                            alt={carouselData[currentIndex].title}
-                            class="w-full h-full object-cover block rounded-2xl"
+                            src={moment.image}
+                            alt=""
+                            loading="lazy"
+                            style:object-position={moment.position}
                         />
+                    </button>
+                    <div class="moment-copy">
+                        <span>{String(index + 1).padStart(2, "0")} / {moment.label}</span>
+                        <h3 id={`moment-${index + 1}-title`}>{moment.title}</h3>
+                        <p id={`moment-${index + 1}-caption`}>{moment.copy}</p>
                     </div>
-                    <!-- Text Container -->
-                    <div
-                        class="w-full flex flex-col grow justify-center md:w-1/2"
-                    >
-                        <h3 class="text-2xl font-bold mb-2">
-                            {carouselData[currentIndex].title}
-                        </h3>
-                        <p
-                            class="text-base leading-relaxed text-black py-6 pr-0 md:pr-4"
-                        >
-                            {carouselData[currentIndex].description}
-                        </p>
-                    </div>
-                </div>
-            {/key}
+                </article>
+            {/each}
         </div>
     </div>
 </section>
 
+<style>
+    .progress-section { padding: 128px 0 108px; color: var(--ink); background: var(--paper); }
+    .progress-intro { display: grid; align-items: end; gap: clamp(40px, 6vw, 86px); margin-top: 38px; grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr); }
+    h2 { max-width: 900px; margin: 0; font-size: clamp(3.8rem, 6.2vw, 6.3rem); font-weight: 850; letter-spacing: -0.078em; line-height: 0.9; }
+    .progress-intro > p { max-width: 440px; margin: 0; color: var(--grey); font-size: 1rem; line-height: 1.72; }
+    .stream-label { display: flex; align-items: center; justify-content: space-between; margin-top: 86px; padding: 15px 0; border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink); font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; font-size: 0.66rem; font-weight: 750; letter-spacing: 0.1em; text-transform: uppercase; }
+    .moments-grid { display: grid; border-left: 2px solid var(--ink); grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    article { overflow: hidden; border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink); background: var(--paper); }
+    article.featured { display: grid; grid-column: 1 / -1; grid-template-columns: minmax(0, 1.55fr) minmax(310px, 0.65fr); }
+    .moment-image { display: block; width: 100%; height: 268px; overflow: hidden; padding: 0; border: 0; border-bottom: 2px solid var(--ink); border-radius: 0; background: #d4d4d0; cursor: pointer; }
+    .featured .moment-image { height: 480px; border-right: 2px solid var(--ink); border-bottom: 0; }
+    .moment-image img { display: block; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.06); transform: scale(1.002); transition: filter 180ms ease-out, transform 260ms ease-out; }
+    article:hover .moment-image img, article:focus-within .moment-image img, article.revealed .moment-image img { filter: none; transform: scale(1.018); }
+    .moment-image:focus-visible { position: relative; z-index: 1; outline: 4px solid var(--ink); outline-offset: -8px; }
+    .moment-copy { padding: 28px 29px 34px; }
+    .featured .moment-copy { display: flex; justify-content: center; padding: clamp(34px, 4.6vw, 58px); flex-direction: column; }
+    .moment-copy > span { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; font-size: 0.64rem; font-weight: 750; letter-spacing: 0.075em; line-height: 1.4; text-transform: uppercase; }
+    h3 { margin: 16px 0 12px; font-size: clamp(1.45rem, 2vw, 1.85rem); font-weight: 850; letter-spacing: -0.052em; line-height: 1.04; }
+    .featured h3 { font-size: clamp(2.2rem, 3.5vw, 3.7rem); }
+    .moment-copy p { margin: 0; color: var(--grey); font-size: 0.9rem; line-height: 1.58; }
+
+    @media (max-width: 820px) {
+        .progress-section { padding-block: 104px 90px; }
+        .progress-intro { align-items: start; gap: 28px; grid-template-columns: 1fr; }
+        h2 { font-size: clamp(3.3rem, 11vw, 5.1rem); }
+        .moments-grid { grid-template-columns: 1fr; }
+        article.featured { display: block; grid-column: auto; }
+        .featured .moment-image { height: 390px; border-right: 0; border-bottom: 2px solid var(--ink); }
+        .featured .moment-copy { padding: 32px; }
+    }
+
+    @media (max-width: 540px) {
+        .progress-section { padding-block: 86px 72px; }
+        h2 { font-size: clamp(3rem, 14vw, 4rem); }
+        .progress-intro > p { font-size: 0.94rem; }
+        .stream-label { margin-top: 58px; }
+        .moment-image, .featured .moment-image { height: 252px; }
+        .moment-copy, .featured .moment-copy { padding: 24px 22px 28px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) { .moment-image img { transition: none; } }
+</style>

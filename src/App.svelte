@@ -1,49 +1,59 @@
 <script lang="ts">
-    import "./app.css";
     import { router } from "./router.svelte.js";
     import NavBar from "./lib/Navbar.svelte";
-    import Intro from "./lib/Intro.svelte";
+    import Partners from "./lib/Partners.svelte";
     import Demo from "./lib/Demo.svelte";
     import WorkInProgress from "./lib/WorkInProgress.svelte";
     import Milestones from "./lib/Milestones.svelte";
-    import Partners from "./lib/Partners.svelte";
+    import Press from "./lib/Press.svelte";
     import Team from "./lib/Team.svelte";
+    import FinalCta from "./lib/FinalCta.svelte";
     import Privacy from "./lib/Privacy.svelte";
     import Support from "./lib/Support.svelte";
 </script>
 
-{#if router.path === '/privacy'}
+<svelte:head>
+    {#if router.path === "/"}
+        <title>Oculis — Navigate with confidence</title>
+        <meta
+            name="description"
+            content="Oculis is an accessible public transport platform for clearer journeys, live information, station accessibility details and hands-free guidance."
+        />
+    {:else if router.path !== "/privacy" && router.path !== "/support"}
+        <title>Page not found — Oculis</title>
+        <meta
+            name="description"
+            content="The requested page could not be found on the Oculis website."
+        />
+    {/if}
+</svelte:head>
+
+{#if router.path === "/privacy"}
     <Privacy />
-{:else if router.path === '/support'}
+{:else if router.path === "/support"}
     <Support />
-{:else if router.path === '/'}
+{:else if router.path === "/"}
     <NavBar />
-    <main>
-        <section id="about">
-            <Intro />
-        </section>
-        <section id="demo">
-            <Demo />
-        </section>
-        <section id="wip">
-            <WorkInProgress />
-        </section>
-        <section id="milestones">
+    <main id="main-content" tabindex="-1">
+        <span id="top" class="anchor-target" aria-hidden="true"></span>
+        <WorkInProgress />
+        <Partners />
+        <Demo />
+        <div data-preview="evidence">
             <Milestones />
-        </section>
-        <section id="partners">
-            <Partners />
-        </section>
-        <section id="team">
-            <Team />
-        </section>
+            <Press />
+        </div>
+        <Team />
+        <FinalCta />
     </main>
 {:else}
-    <div class="min-h-screen bg-white flex items-center justify-center">
-        <div class="text-center">
-            <h1 class="text-4xl font-bold text-black mb-4">Page Not Found</h1>
-            <p class="text-gray-600 mb-6">The page you're looking for doesn't exist.</p>
-            <a href="/" class="text-blue-600 underline">Go to Home</a>
-        </div>
-    </div>
+    <main class="not-found" id="main-content" tabindex="-1">
+        <a class="wordmark" href="/">
+            <img src="/oculis-mark-v2.png" alt="" width="42" height="42" />
+            <span>oculis</span>
+        </a>
+        <h1>Page not found.</h1>
+        <p>The page you are looking for does not exist.</p>
+        <a class="button button-primary" href="/">Return home</a>
+    </main>
 {/if}
